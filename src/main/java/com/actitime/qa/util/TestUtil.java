@@ -28,9 +28,7 @@ public class TestUtil extends TestBase{
 
 	
 public void swithToFrame(String framaName) {
-		
 		driver.switchTo().frame(framaName);
-		
 	}
 
 public static Object[][] getTestData(String sheetName) {
@@ -53,11 +51,9 @@ public static Object[][] getTestData(String sheetName) {
 	for (int i = 0; i < sheet.getLastRowNum(); i++) {
 		for (int k = 0; k < sheet.getRow(0).getLastCellNum(); k++) {
 			data[i][k] = sheet.getRow(i + 1).getCell(k).getStringCellValue().trim();
-			
 		}
 	}
 	return data;
-	
 }
 
 public static void takeScreenshotAtEndOfTest() throws IOException {
