@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.actitime.qa.base.TestBase;
 
+
 public class LoginPage extends TestBase {
 	
 	//Page Factory - Object Repository
@@ -15,9 +16,7 @@ public class LoginPage extends TestBase {
 		@CacheLookup
 		WebElement userName;
 		
-		
-		
-		
+			
 		@FindBy(xpath = "//input[@type='password'and @name='pwd']")
 		WebElement passWord;
 		
@@ -38,18 +37,13 @@ public class LoginPage extends TestBase {
 		//initialization
 		
 		public LoginPage() {
-			
 			PageFactory.initElements(driver, this);
-			
-			
-			
 		}
 		
 		//Action/Methods
 		
 		public Boolean validateActiTimeLogo() {
 			return actiTimeLogo.isDisplayed();
-			
 		}
 		
 		public HomePage loging(String uName, String pword) {
@@ -60,5 +54,4 @@ public class LoginPage extends TestBase {
 			return new HomePage();
 			
 		}
-
 }

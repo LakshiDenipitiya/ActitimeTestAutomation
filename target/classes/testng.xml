@@ -1,0 +1,8 @@
+<?xml version = "1.0" encoding = "UTF-8"?><!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="UCSC Actitime Test Automation suite">
+	<listeners>
+		<listener class-name="com.actitime.qa.ExtentReportListener.ExtentReporterNG"></listener></listeners><test name="UCSC Actitime Test Automation Testcases">
+		<classes>
+			<class name="com.actitime.qa.testcases.LoginPageTest"></class>
+			<class name="com.actitime.qa.testcases.HomePageTest"></class></classes></test>
+	</suite>

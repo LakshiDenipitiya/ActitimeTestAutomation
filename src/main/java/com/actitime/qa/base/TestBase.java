@@ -9,22 +9,25 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import com.actitime.qa.util.TestUtil;
+import com.actitime.qa.util.WebEventListener;
 
 public class TestBase {
 	
 	public static WebDriver driver;
 	public static Properties properties;
 	
+	public  static EventFiringWebDriver e_driver;
+	public static WebEventListener eventListener;
+	
 		
-	public TestBase() {
+	/*public TestBase() {
 		
 		try {
 			properties = new Properties();
-			FileInputStream iprop = new FileInputStream(System.getProperty("Users/Lakshi/eclipse-workspace/UCSCActitimeTest/src/main/java/com/actitime/qa/config/config.properties"));
+			FileInputStream iprop = new FileInputStream(System.getProperty("C:\\Users\\Lakshi\\eclipse-workspace\\UCSCActitimeTest\\src\\main\\java\\com\\actitime\\qa\\config\\config.properties"));
 			properties.load(iprop);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -32,6 +35,19 @@ public class TestBase {
 			e.printStackTrace();
 		}
 		
+	}*/
+	public TestBase() {
+	    
+	    try { 
+	    	properties= new Properties();
+	        FileInputStream ip= new FileInputStream("C:\\Users\\Lakshi\\eclipse-workspace\\UCSCActitimeTest\\src\\main\\java\\com\\actitime\\qa\\config\\config.properties");
+	        properties.load(ip);
+	        
+	    }catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    }catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
 		
 		public static void initialization(){
@@ -39,19 +55,17 @@ public class TestBase {
 String browserName = properties.getProperty("browser");
 		
 		if(browserName.equals("chrome")){
-			System.setProperty("webdriver.chrome.driver", "/Users/Lakshi/Downloads/chromedriver_win32");	
+			System.setProperty("webdriver.chrome.driver", "/Users/Lakshi/Downloads/chromedriver_win32/chromedriver.exe");	
 			driver = new ChromeDriver(); 
 		}
-		else if(browserName.equals("Firefox")){
-			//System.setProperty("webdriver.gecko.driver", "//Users//methuliakithma//Documents//Trainings//UCSC//");	
-			driver = new FirefoxDriver(); 
-		}
-		else if (browserName.equals("IE")){
-			
-			//code for IE Driver
-		}
 		
-	
+		
+		
+		e_driver = new EventFiringWebDriver(driver);
+		// Now create object of EventListerHandler to register it with EventFiringWebDriver
+		eventListener = new WebEventListener();
+		e_driver.register(eventListener);
+		driver = e_driver;
 		
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
